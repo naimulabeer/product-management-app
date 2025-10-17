@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 /* optional: nicer defaults */
 :root {
   color-scheme: light;
