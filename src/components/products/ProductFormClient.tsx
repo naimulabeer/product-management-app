@@ -32,6 +32,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
+import { extractApiError } from "@/lib/apiError";
 
 type Props =
   | { mode: "create"; slug?: undefined }
@@ -46,14 +47,14 @@ export default function ProductFormClient(props: Props) {
   const [createProduct, createState] = useCreateProductMutation();
   const [updateProduct, updateState] = useUpdateProductMutation();
 
-  // ✅ use *input* type for RHF
+  // create form (input type)
   const createForm = useForm<ProductCreateForm>({
     resolver: zodResolver(productCreateSchema),
     defaultValues: {
       name: "",
       description: "",
       images: [""],
-      price: 0 as any,
+      price: 0,
       categoryId: "",
     },
     mode: "onChange",
@@ -61,7 +62,7 @@ export default function ProductFormClient(props: Props) {
 
   const updateForm = useForm<ProductUpdateForm>({
     resolver: zodResolver(productUpdateSchema),
-    defaultValues: { images: [""] }, // give arrays a default shape to make FieldArray happy
+    defaultValues: { images: [""], categoryId: "" },
     mode: "onChange",
   });
 
@@ -88,22 +89,31 @@ export default function ProductFormClient(props: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isEdit, productQ.data]);
 
+  // errors
+  const errors = form.formState.errors;
+
+  // API error message (no any)
+  const requestError =
+    (createState.isError && extractApiError(createState.error)) ||
+    (updateState.isError && extractApiError(updateState.error)) ||
+    "";
+
+  // submit (no any)
   const onSubmit = async (values: ProductCreateForm | ProductUpdateForm) => {
     try {
       if (isEdit) {
         const id = productQ.data?.id;
         if (!id) return;
-        // ✅ parse to output type (price becomes number, etc.)
-        const parsed: ProductUpdateData = productUpdateSchema.parse(values);
+        const parsed = productUpdateSchema.parse(values);
         const res = await updateProduct({ id, data: parsed }).unwrap();
         router.replace(`/products/${res.slug}`);
       } else {
-        const parsed: ProductCreateData = productCreateSchema.parse(values);
+        const parsed = productCreateSchema.parse(values);
         const res = await createProduct(parsed).unwrap();
         router.replace(`/products/${res.slug}`);
       }
     } catch {
-      // errors shown below
+      /* handled via requestError */
     }
   };
 
@@ -145,7 +155,6 @@ export default function ProductFormClient(props: Props) {
   }
 
   const busy = createState.isLoading || updateState.isLoading;
-  const errors = form.formState.errors;
 
   return (
     <div className="mx-auto max-w-3xl p-4">

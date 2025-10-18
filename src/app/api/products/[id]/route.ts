@@ -1,18 +1,31 @@
+import type { NextRequest } from "next/server"
 import { authHeaders, passThrough, UPSTREAM } from "../../_utils/proxy"
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+// PUT /api/products/:id
+export async function PUT(
+  req: NextRequest,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id } = await context.params                   // 👈 await the params
   const body = await req.json().catch(() => ({}))
-  const res = await fetch(`${UPSTREAM}/products/${params.id}`, {
+
+  const res = await fetch(`${UPSTREAM}/products/${id}`, {
     method: "PUT",
-    headers: await authHeaders(),
+    headers: await authHeaders(),                              // 👈 no await
     body: JSON.stringify(body),
     cache: "no-store",
   })
   return passThrough(res)
 }
 
-export async function DELETE(_req: Request, { params }: { params: { id: string } }) {
-  const res = await fetch(`${UPSTREAM}/products/${params.id}`, {
+// DELETE /api/products/:id
+export async function DELETE(
+  _req: NextRequest,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id } = await context.params                   // 👈 await the params
+
+  const res = await fetch(`${UPSTREAM}/products/${id}`, {
     method: "DELETE",
     headers: await authHeaders(),
     cache: "no-store",

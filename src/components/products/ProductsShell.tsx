@@ -2,7 +2,7 @@
 
 import { useGetCategoriesQuery } from "@/services/categoriesApi";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   useGetProductsQuery,
   useSearchProductsQuery,
@@ -20,6 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { extractApiError } from "@/lib/apiError"
 
 export default function ProductsShell() {
   // state
@@ -56,12 +57,8 @@ export default function ProductsShell() {
     ? searchQuery.isFetching && !searchQuery.data
     : listQuery.isFetching && !listQuery.data;
   const errorMsg = searching
-    ? searchQuery.isError
-      ? (searchQuery.error as any)?.data?.message || "Search failed"
-      : null
-    : listQuery.isError
-    ? (listQuery.error as any)?.data?.message || "Failed to load products"
-    : null;
+  ? (searchQuery.isError ? extractApiError(searchQuery.error) : null)
+  : (listQuery.isError ? extractApiError(listQuery.error) : null)
 
   // basic next/prev availability: upstream doesn’t return total, so we allow next if page is "full"
   const canNext = !searching && (listQuery.data?.length ?? 0) === limit;
