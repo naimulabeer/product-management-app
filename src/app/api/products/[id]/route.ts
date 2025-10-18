@@ -6,24 +6,24 @@ export async function PUT(
   req: NextRequest,
   context: { params: Promise<{ id: string }> }
 ) {
-  const { id } = await context.params                   // 👈 await the params
+  const { id } = await context.params                   
   const body = await req.json().catch(() => ({}))
 
   const res = await fetch(`${UPSTREAM}/products/${id}`, {
     method: "PUT",
-    headers: await authHeaders(),                              // 👈 no await
+    headers: await authHeaders(),                              
     body: JSON.stringify(body),
     cache: "no-store",
   })
   return passThrough(res)
 }
 
-// DELETE /api/products/:id
+
 export async function DELETE(
   _req: NextRequest,
   context: { params: Promise<{ id: string }> }
 ) {
-  const { id } = await context.params                   // 👈 await the params
+  const { id } = await context.params                  
 
   const res = await fetch(`${UPSTREAM}/products/${id}`, {
     method: "DELETE",

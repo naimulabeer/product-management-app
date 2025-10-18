@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    // Basic safety: only allow https and limit length
+
     const parsed = new URL(urlParam)
     if (parsed.protocol !== "https:") {
       return new Response("Only https is allowed", { status: 400 })
@@ -27,7 +27,6 @@ export async function GET(req: NextRequest) {
       status: 200,
       headers: {
         "Content-Type": contentType,
-        // 1 day CDN cache, revalidate in background if you deploy on Vercel
         "Cache-Control": "public, s-maxage=86400, stale-while-revalidate=86400",
       },
     })

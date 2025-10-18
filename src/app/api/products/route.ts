@@ -3,7 +3,6 @@ import { UPSTREAM, authHeaders, passThrough } from "../_utils/proxy"
 
 export async function GET(req: NextRequest) {
   const sp = new URL(req.url).searchParams
-  // supports: ?offset=..&limit=..&categoryId=..
   const qs = sp.toString()
   const url = `${UPSTREAM}/products${qs ? `?${qs}` : ""}`
   const res = await fetch(url, { method: "GET", headers: await authHeaders(), cache: "no-store" })

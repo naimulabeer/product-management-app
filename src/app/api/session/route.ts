@@ -7,11 +7,11 @@ export async function POST(request: Request) {
   }
   const c = await cookies()
   c.set("pma_token", token, {
-    httpOnly: false,          // simple for demo; set true if you’ll avoid reading it client-side
+    httpOnly: false,         
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
     path: "/",
-    maxAge: 60 * 60 * 24 * 3, // 3 days
+    maxAge: 60 * 60 * 24 * 3, 
   })
   c.set("pma_email", email ?? "", {
     httpOnly: false,

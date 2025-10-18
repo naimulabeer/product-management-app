@@ -1,7 +1,7 @@
 import type { NextRequest } from "next/server"
 import { authHeaders, passThrough, UPSTREAM } from "../../../_utils/proxy"
 
-// GET /api/products/by-slug/:slug
+
 export async function GET(
   _req: NextRequest,
   context: { params: Promise<{ slug: string }> }

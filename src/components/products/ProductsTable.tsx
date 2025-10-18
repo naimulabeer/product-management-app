@@ -62,15 +62,15 @@ export default function ProductsTable({
       <div className="divide-y divide-ink/10 bg-white">
         {data.map((p) => (
           <div key={p.id} className="grid grid-cols-[2fr,1fr,1fr,1fr] self-start items-start px-4 py-3 gap-3">
-            <div className="font-medium line-clamp-1">{p.name}</div>
+            <div className="font-medium line-clamp-1">{p?.name}</div>
             <div className="text-sm text-ink/70">{p.category?.name ?? "-"}</div>
-            <div className="text-sm">{Number(p.price).toFixed(2)}</div>
+            <div className="text-sm">{Number(p?.price).toFixed(2)}</div>
             <div className="flex items-center gap-2">
               <Button asChild variant="outline" size="sm">
-                <Link href={`/products/${p.slug}`}>Details</Link>
+                <Link href={`/products/${p?.slug}`}>Details</Link>
               </Button>
               <Button asChild variant="outline" size="sm">
-                <Link href={`/products/${p.slug}/edit`}>Edit</Link>
+                <Link href={`/products/${p?.slug}/edit`}>Edit</Link>
               </Button>
               <ConfirmDelete id={p.id} name={p.name} />
             </div>

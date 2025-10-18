@@ -64,13 +64,12 @@ export default function ProductsShell() {
     ? extractApiError(listQuery.error)
     : null;
 
-  // basic next/prev availability: upstream doesn’t return total, so we allow next if page is "full"
   const canNext = !searching && (listQuery.data?.length ?? 0) === limit;
   const onNext = () => setOffset((o) => o + limit);
   const onPrev = () => setOffset((o) => Math.max(0, o - limit));
   useEffect(() => {
     setOffset(0);
-  }, [debouncedQ]); // reset when switching search mode
+  }, [debouncedQ]); 
 
   return (
     <div className="mx-auto max-w-6xl p-4">
@@ -134,7 +133,7 @@ export default function ProductsShell() {
               disabled={listQuery.isFetching}
               count={listQuery.data?.length ?? 0}
               limit={limit}
-              // total={someTotalFromApiIfAvailable}
+              
             />
           )}
         </CardContent>

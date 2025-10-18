@@ -12,11 +12,8 @@ export default function ProductsPagination({
   onPrev: () => void
   onNext: () => void
   disabled?: boolean
-  /** number of items on the current page */
   count?: number
-  /** total items across all pages (optional; if provided with limit, we show "of Y") */
   total?: number
-  /** page size (optional; used with total to compute total pages) */
   limit?: number
 }) {
   const totalPages =

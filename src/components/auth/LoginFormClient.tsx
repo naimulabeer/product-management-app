@@ -46,7 +46,7 @@ export default function LoginFormClient() {
       // save to redux (for client fetches)
       dispatch(setCredentials({ token: res.token, email: values.email }));
 
-      // save to cookie (so server pages can guard/redirect)
+      // save to cookie
       await fetch("/api/session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

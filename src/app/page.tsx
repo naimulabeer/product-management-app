@@ -14,7 +14,7 @@ export default async function HomePage() {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(40%_30%_at_50%_0%,rgba(164,74,63,0.08),transparent_70%),radial-gradient(40%_30%_at_0%_60%,rgba(78,110,93,0.08),transparent_70%),radial-gradient(40%_30%_at_100%_60%,rgba(173,138,100,0.08),transparent_70%)]" />
 
       <section className="mx-auto max-w-7xl px-4 sm:px-6 py-10 md:py-16 grid md:grid-cols-2 gap-8 items-center">
-        {/* Copy */}
+       
         <div className="space-y-5">
           <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-ink">
             Product Management App
@@ -43,7 +43,7 @@ export default async function HomePage() {
           </div>
         </div>
 
-        {/* Banner */}
+        {/* Banner section */}
         <Card className="md:ml-auto border-ink/10 shadow-sm overflow-hidden">
           <CardContent className="p-0">
             <Image
@@ -58,7 +58,7 @@ export default async function HomePage() {
         </Card>
       </section>
 
-      {/* Lower teaser */}
+      {/* Lower part */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 pb-14">
         <div className="grid gap-4 md:grid-cols-3">
           <div className="rounded-2xl bg-white border border-ink/10 p-5">

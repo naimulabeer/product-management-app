@@ -1,4 +1,3 @@
-// src/components/products/ProductFormClient.tsx
 "use client";
 
 import { useGetCategoriesQuery } from "@/services/categoriesApi";
@@ -47,7 +46,7 @@ export default function ProductFormClient(props: Props) {
   const [createProduct, createState] = useCreateProductMutation();
   const [updateProduct, updateState] = useUpdateProductMutation();
 
-  // create form (input type)
+  
   const createForm = useForm<ProductCreateForm>({
     resolver: zodResolver(productCreateSchema),
     defaultValues: {
@@ -68,13 +67,13 @@ export default function ProductFormClient(props: Props) {
 
   const form = isEdit ? updateForm : createForm;
 
-  // Field arrays (typed)
+  
   const { fields, append, remove } = useFieldArray({
     control: form.control as any,
     name: "images",
   });
 
-  // Hydrate edit defaults when data arrives
+  
   useEffect(() => {
     if (isEdit && productQ.data) {
       updateForm.reset({
@@ -86,7 +85,7 @@ export default function ProductFormClient(props: Props) {
         categoryId: productQ.data.category?.id ?? "",
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    
   }, [isEdit, productQ.data]);
 
   // errors

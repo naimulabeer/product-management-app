@@ -1,4 +1,3 @@
-// src/features/products/schemas.ts
 import { z } from "zod"
 
 export const urlStr = z.string().url("Must be a valid URL")
@@ -17,7 +16,7 @@ export const productUpdateSchema = productCreateSchema.partial().refine(
   { message: "Provide at least one field to update" }
 )
 
-// ✅ RHF should use the *input* types (before coercion)
+
 export type ProductCreateForm = z.input<typeof productCreateSchema>
 export type ProductCreateData = z.output<typeof productCreateSchema>
 

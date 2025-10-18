@@ -1,7 +1,6 @@
 import { NextRequest } from "next/server"
 import { authHeaders, passThrough, UPSTREAM } from "../../_utils/proxy"
 
-// GET /api/categories/search?searchedText=...
 export async function GET(req: NextRequest) {
   const sp = new URL(req.url).searchParams
   const searchedText = sp.get("searchedText") || ""
