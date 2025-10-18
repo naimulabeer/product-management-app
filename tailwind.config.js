@@ -9,6 +9,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-montserrat)", "ui-sans-serif", "system-ui", "Segoe UI", "Roboto", "Helvetica", "Arial", "Apple Color Emoji", "Segoe UI Emoji"],
+      },
       colors: {
         ink: "#0D1821",
         mist: "#EFF1F3",
@@ -56,6 +59,7 @@ export default {
           5: "hsl(var(--chart-5))",
         },
       },
+
       borderRadius: {
         xl: "0.75rem",
         "2xl": "1rem",

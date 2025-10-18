@@ -1,34 +1,31 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css"
+import "./globals.css";
 import Providers from "./providers";
-import Header from "@/components/app/Header";
+import { Montserrat } from "next/font/google";
+import Navbar from "@/components/global/Navbar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const montserrat = Montserrat({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"], // pick what you need
+  variable: "--font-montserrat",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Product Management",
-  description: "Browse, create, edit, view, and delete products",
+  title: "BitechX · Product Management",
+  description: "Browse, create, edit, and manage products",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" className="bg-mist text-ink">
+    <html lang="en" className={`${montserrat.variable} bg-mist text-ink`}>
       <body>
         <Providers>
-          <Header />
+          <Navbar />
           {children}
         </Providers>
       </body>

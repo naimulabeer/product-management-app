@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { extractApiError } from "@/lib/apiError";
 import Image from "next/image";
+const proxied = (u: string) => `/api/image?url=${encodeURIComponent(u)}`
 
 export default function ProductDetailsClient({ slug }: { slug: string }) {
   const { data, isFetching, isError, error, refetch } =
@@ -118,7 +119,7 @@ export default function ProductDetailsClient({ slug }: { slug: string }) {
             {data.images?.map((src) => (
               <Image
                 key={src}
-                src={src}
+                src={proxied(src)}
                 alt={data.name}
                 width={112} // 7rem
                 height={112}
