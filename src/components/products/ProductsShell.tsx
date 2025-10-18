@@ -69,19 +69,19 @@ export default function ProductsShell() {
   const onPrev = () => setOffset((o) => Math.max(0, o - limit));
   useEffect(() => {
     setOffset(0);
-  }, [debouncedQ]); 
+  }, [debouncedQ]);
 
   return (
     <div className="mx-auto max-w-6xl p-4">
       <Card className="border-ink/10">
-        <CardHeader className="flex flex-row items-center justify-between gap-4">
+        <CardHeader className="flex flex-row flex-wrap items-center justify-between gap-4">
           <CardTitle className="text-ink">Products</CardTitle>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-between gap-2">
             <Input
               placeholder="Search by name..."
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              className="w-56"
+              className="w-48"
             />
             <Button asChild>
               <Link href="/products/new">Add Product</Link>
@@ -133,7 +133,6 @@ export default function ProductsShell() {
               disabled={listQuery.isFetching}
               count={listQuery.data?.length ?? 0}
               limit={limit}
-              
             />
           )}
         </CardContent>
