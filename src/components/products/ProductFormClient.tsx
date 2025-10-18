@@ -273,10 +273,6 @@ export default function ProductFormClient(props: Props) {
                   )}
                 />
               )}
-
-              <p className="text-sm text-clay">
-                {(form.formState.errors.categoryId?.message as string) || ""}
-              </p>
             </div>
 
             {(createState.isError || updateState.isError) && (

@@ -52,7 +52,7 @@ export default function ProductsTable({
 
   return (
     <div className="rounded-md border border-ink/10 overflow-hidden">
-      <div className="grid grid-cols-[2fr,1fr,1fr,auto] bg-white px-4 py-3 text-sm font-medium text-ink/70">
+      <div className="grid grid-cols-[2fr,1fr,1fr,1fr] self-start bg-white px-4 py-3 text-sm font-medium text-ink/70">
         <div>Name</div>
         <div>Category</div>
         <div>Price</div>
@@ -61,8 +61,8 @@ export default function ProductsTable({
 
       <div className="divide-y divide-ink/10 bg-white">
         {data.map((p) => (
-          <div key={p.id} className="grid grid-cols-[2fr,1fr,1fr,auto] items-center px-4 py-3 gap-3">
-            <div className="font-medium">{p.name}</div>
+          <div key={p.id} className="grid grid-cols-[2fr,1fr,1fr,1fr] self-start items-start px-4 py-3 gap-3">
+            <div className="font-medium line-clamp-1">{p.name}</div>
             <div className="text-sm text-ink/70">{p.category?.name ?? "-"}</div>
             <div className="text-sm">{Number(p.price).toFixed(2)}</div>
             <div className="flex items-center gap-2">

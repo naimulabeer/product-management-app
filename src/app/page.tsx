@@ -24,7 +24,7 @@ export default async function HomePage() {
             a clean, responsive UI — all powered by Next.js, RTK Query, and shadcn.
           </p>
           <div className="flex flex-wrap gap-3">
-            <Button asChild>
+            <Button className="bg-[#A44A3F] hover:bg-[#AD8A64]" asChild>
               <Link href="/products">Open Products</Link>
             </Button>
              {!isAuthed && (
@@ -36,10 +36,10 @@ export default async function HomePage() {
 
           {/* Feature chips */}
           <div className="flex flex-wrap gap-2 pt-2">
-            <span className="inline-flex items-center rounded-full border border-ink/10 bg-white px-3 py-1 text-xs text-ink/70">JWT Auth</span>
-            <span className="inline-flex items-center rounded-full border border-ink/10 bg-white px-3 py-1 text-xs text-ink/70">Search & Pagination</span>
-            <span className="inline-flex items-center rounded-full border border-ink/10 bg-white px-3 py-1 text-xs text-ink/70">Create / Edit / Delete</span>
-            <span className="inline-flex items-center rounded-full border border-ink/10 bg-white px-3 py-1 text-xs text-ink/70">Responsive UI</span>
+            <span className="inline-flex items-center rounded-full border border-ink/10 bg-[#EFF1F3] px-3 py-1 text-xs text-ink/70">JWT Auth</span>
+            <span className="inline-flex items-center rounded-full border border-ink/10 bg-[#EFF1F3] px-3 py-1 text-xs text-ink/70">Search & Pagination</span>
+            <span className="inline-flex items-center rounded-full border border-ink/10 bg-[#EFF1F3] px-3 py-1 text-xs text-ink/70">Create / Edit / Delete</span>
+            <span className="inline-flex items-center rounded-full border border-ink/10 bg-[#EFF1F3] px-3 py-1 text-xs text-ink/70">Responsive UI</span>
           </div>
         </div>
 

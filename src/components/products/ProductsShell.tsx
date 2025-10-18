@@ -20,7 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { extractApiError } from "@/lib/apiError"
+import { extractApiError } from "@/lib/apiError";
 
 export default function ProductsShell() {
   // state
@@ -57,8 +57,12 @@ export default function ProductsShell() {
     ? searchQuery.isFetching && !searchQuery.data
     : listQuery.isFetching && !listQuery.data;
   const errorMsg = searching
-  ? (searchQuery.isError ? extractApiError(searchQuery.error) : null)
-  : (listQuery.isError ? extractApiError(listQuery.error) : null)
+    ? searchQuery.isError
+      ? extractApiError(searchQuery.error)
+      : null
+    : listQuery.isError
+    ? extractApiError(listQuery.error)
+    : null;
 
   // basic next/prev availability: upstream doesn’t return total, so we allow next if page is "full"
   const canNext = !searching && (listQuery.data?.length ?? 0) === limit;
@@ -85,29 +89,30 @@ export default function ProductsShell() {
             </Button>
           </div>
         </CardHeader>
-
-        {!catsQ.isError && catsQ.data && (
-          <Select
-            value={categoryId || sentinelAll}
-            onValueChange={(v) => {
-              setCategoryId(v === sentinelAll ? "" : v);
-              setOffset(0);
-            }}
-          >
-            <SelectTrigger className="w-44">
-              <SelectValue placeholder="All categories" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value={sentinelAll}>All categories</SelectItem>{" "}
-              {/* ✅ non-empty */}
-              {catsQ.data?.map((c) => (
-                <SelectItem key={c.id} value={c.id}>
-                  {c.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        )}
+        <div className="px-6 pb-4">
+          {!catsQ.isError && catsQ.data && (
+            <Select
+              value={categoryId || sentinelAll}
+              onValueChange={(v) => {
+                setCategoryId(v === sentinelAll ? "" : v);
+                setOffset(0);
+              }}
+            >
+              <SelectTrigger className="w-1/5">
+                <SelectValue placeholder="All categories" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value={sentinelAll}>All categories</SelectItem>{" "}
+                {/* ✅ non-empty */}
+                {catsQ.data?.map((c) => (
+                  <SelectItem key={c.id} value={c.id}>
+                    {c.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
+        </div>
 
         <CardContent className="space-y-4">
           <ProductsTable
@@ -127,6 +132,9 @@ export default function ProductsShell() {
               onNext={onNext}
               onPrev={onPrev}
               disabled={listQuery.isFetching}
+              count={listQuery.data?.length ?? 0}
+              limit={limit}
+              // total={someTotalFromApiIfAvailable}
             />
           )}
         </CardContent>
